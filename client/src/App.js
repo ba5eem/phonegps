@@ -19,7 +19,7 @@ class App extends Component {
     lon: -157.788867,
     status: 'Looking for location...',
     name: '',
-    count: ''
+    count: 1
   }
 
   componentDidMount() {
@@ -35,7 +35,7 @@ class App extends Component {
     })
     setInterval(() => {
       this.sendPoi()
-    },1000)
+    },3000)
 }
 
 
@@ -44,11 +44,10 @@ class App extends Component {
       this.setState({
         lat: location.coords.latitude,
         lon: location.coords.longitude,
-        count: this.state.count++
       })
     })
 
-    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${this.state.name}/${this.state.count}`)
+    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${this.state.name}/${this.state.count++}`)
     .then(res=> {
       console.log(res);
     })
