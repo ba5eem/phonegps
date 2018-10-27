@@ -12,7 +12,7 @@ function makeid() {
 
       return text;
     }
-
+const count = 1;
 class App extends Component {
   state = {
     lat: 21.436057,
@@ -40,7 +40,6 @@ class App extends Component {
 
 
   sendPoi = () => {
-    let count = 1;
     navigator.geolocation.getCurrentPosition(location => {
       this.setState({
         lat: location.coords.latitude,
