@@ -63,7 +63,6 @@ class App extends Component {
       <div className="App">
         <h2>{this.state.status}</h2>
         <h2>ID: {this.state.name}</h2>
-        <h3>Location updated count: {this.state.count}</h3>
       </div>
     )
   }
