@@ -44,7 +44,7 @@ class App extends Component {
       this.setState({
         lat: location.coords.latitude,
         lon: location.coords.longitude,
-        count: count +=1
+        count: this.state.count++
       })
     })
 
