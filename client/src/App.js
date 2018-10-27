@@ -24,8 +24,9 @@ class App extends Component {
 
 
   sendPoi = () => {
+    let name = window.location.origin;
     console.log(this.state);
-    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}`)
+    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${name}`)
     .then(res=> {
       console.log(res);
     })

@@ -1,5 +1,4 @@
 const express = require('express')
-const cowsay = require('cowsay')
 const cors = require('cors')
 const path = require('path')
 
@@ -10,14 +9,16 @@ const app = express()
 app.use(express.static(path.join(__dirname, 'client/build')))
 
 
-let coords = [21.436057,-157.788867];
+let coords = [21.436057,-157.788867, 'iphone'];
 // Serve our api route /cow that returns a custom talking text cow
-app.get('/api/gps/:lat/:lon', cors(), async (req, res, next) => {
+app.get('/api/gps/:lat/:lon/:name', cors(), async (req, res, next) => {
   console.log(req.params);
   let lat = req.params.lat;
   let lon = req.params.lon;
+  let name = req.params.name;
   coords[0] = lat;
   coords[1] = lon;
+  coords[3] = name;
   res.json(coords);
 })
 
