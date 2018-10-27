@@ -2,19 +2,33 @@ import React, { Component } from 'react'
 import './App.css';
 import axios from 'axios';
 
+
+function makeid() {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for (var i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
+
 class App extends Component {
   state = {
     lat: 21.436057,
     lon: -157.788867,
-    status: 'Looking for location...'
+    status: 'Looking for location...',
+    name: ''
   }
 
   componentDidMount() {
+    let name = makeid();
     navigator.geolocation.getCurrentPosition(location => {
       this.setState({
         lat: location.coords.latitude,
         lon: location.coords.longitude,
-        status: 'Location found...updating server'
+        status: 'Location found...updating server',
+        name: name
       })
     })
     setInterval(() => {
@@ -24,9 +38,7 @@ class App extends Component {
 
 
   sendPoi = () => {
-    let name = window.location.origin;
-    console.log(this.state);
-    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${name}`)
+    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${this.state.name}`)
     .then(res=> {
       console.log(res);
     })
@@ -40,6 +52,7 @@ class App extends Component {
     return (
       <div className="App">
         <h2>{this.state.status}</h2>
+        <h2>ID: {this.state.name}</h2>
       </div>
     )
   }
