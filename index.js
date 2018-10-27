@@ -18,7 +18,7 @@ app.get('/api/gps/:lat/:lon/:name', cors(), async (req, res, next) => {
   let name = req.params.name;
   coords[0] = lat;
   coords[1] = lon;
-  coords[3] = name;
+  coords[2] = name;
   res.json(coords);
 })
 
