@@ -18,7 +18,8 @@ class App extends Component {
     lat: 21.436057,
     lon: -157.788867,
     status: 'Looking for location...',
-    name: ''
+    name: '',
+    count: ''
   }
 
   componentDidMount() {
@@ -28,7 +29,8 @@ class App extends Component {
         lat: location.coords.latitude,
         lon: location.coords.longitude,
         status: 'Location found...updating server',
-        name: name
+        name: name,
+        count: 1
       })
     })
     setInterval(() => {
@@ -38,13 +40,23 @@ class App extends Component {
 
 
   sendPoi = () => {
-    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${this.state.name}`)
+    let count = 1;
+    navigator.geolocation.getCurrentPosition(location => {
+      this.setState({
+        lat: location.coords.latitude,
+        lon: location.coords.longitude,
+        count: count +=1
+      })
+    })
+
+    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${this.state.name}/${this.state.count}`)
     .then(res=> {
       console.log(res);
     })
     .catch(err => {
       console.log('err');
     })
+
   }
 
 
@@ -53,6 +65,7 @@ class App extends Component {
       <div className="App">
         <h2>{this.state.status}</h2>
         <h2>ID: {this.state.name}</h2>
+        <h3>Location updated count: {this.state.count}</h3>
       </div>
     )
   }
