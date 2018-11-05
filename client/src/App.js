@@ -47,7 +47,7 @@ class App extends Component {
       })
     })
 
-    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${this.state.name}/${this.state.count++}`)
+    axios.get(`/api/gps/${this.state.lat}/${this.state.lon}/${this.state.name}/${this.state.count}`)
     .then(res=> {
       console.log(res);
     })
